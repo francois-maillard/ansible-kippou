@@ -1,0 +1,7 @@
+---
+# tasks file for kippou
+
+- include: 'users.yml'
+- include: 'fail2ban.yml'
+- include: 'docker.yml'
+

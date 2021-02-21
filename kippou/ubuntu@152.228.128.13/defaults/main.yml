@@ -1,0 +1,16 @@
+---
+# defaults file for kippou
+
+admin_users:
+  - francois
+  - claire
+
+users:
+  - login: francois
+    uid: 1000
+    groups:
+      - admin
+  - login: claire
+    uid: 1007
+    groups:
+      - admin

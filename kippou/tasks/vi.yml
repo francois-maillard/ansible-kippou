@@ -1,0 +1,13 @@
+
+- name: install vi
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - git
+
+- name: Make VI the default editor
+  alternatives:
+    name: editor
+    path: /usr/bin/vim

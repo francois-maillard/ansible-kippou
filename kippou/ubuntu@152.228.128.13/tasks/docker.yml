@@ -1,0 +1,19 @@
+
+- name: install docker
+  package:
+    name: docker.io
+    state: present
+  notify:
+  - restart docker
+  
+- name: install docker-compose
+  package:
+    name: docker-compose
+    state: present
+
+- name: Add users to group docker
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: "{{ admin_users }}"

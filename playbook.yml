@@ -1,0 +1,6 @@
+- name: "Install play"
+  hosts: localhost
+  become: true
+  connection: local
+  roles:
+  - kippou
