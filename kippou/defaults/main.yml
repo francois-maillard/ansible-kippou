@@ -14,3 +14,18 @@ users:
     uid: 1007
     groups:
       - admin
+
+docker_net:
+  name: www
+  cidr: 172.16.222.0/24
+  gateway: 172.16.222.1
+  ips:
+    haproxy: 172.16.222.80
+    claire: 172.16.222.100
+
+docker_volumes:
+  - haproxy.cfg
+
+docker_services:
+  - claire
+  - haproxy

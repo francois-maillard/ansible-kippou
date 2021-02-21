@@ -1,0 +1,19 @@
+global
+    daemon
+    maxconn 1024
+    pidfile /var/run/haproxy.pid
+
+defaults
+    balance roundrobin
+    timeout client 60s
+    timeout connect 60s
+    timeout server 60s
+
+frontend http
+    bind :80
+
+    acl acl_claire hdr(host) -i claire.kippou.fr
+    use_backend claire if acl_claire
+
+backend claire
+    server server1 {{ docker_net.ips['claire'] }}:80

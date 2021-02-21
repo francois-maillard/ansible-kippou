@@ -1,0 +1,14 @@
+version: "2.3"
+
+services:
+  claire:
+    image: nginx
+    volumes:
+     - /home/claire/www:/usr/share/nginx/html
+    networks:
+      {{ docker_net.name }}:
+        ipv4_address: {{ docker_net.ips.claire }}
+
+networks:
+  {{ docker_net.name }}:
+    external: true

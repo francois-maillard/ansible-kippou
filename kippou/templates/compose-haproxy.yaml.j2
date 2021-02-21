@@ -1,0 +1,16 @@
+version: "2.3"
+
+services:
+  haproxy:
+    image: haproxytech/haproxy-debian:2.0
+    volumes:
+     - /srv/volumes/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+    - "80:80"
+    networks:
+      {{ docker_net.name }}:
+        ipv4_address: {{ docker_net.ips.haproxy }}
+
+networks:
+  {{ docker_net.name }}:
+    external: true

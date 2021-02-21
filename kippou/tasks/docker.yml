@@ -17,3 +17,38 @@
     groups: docker
     append: yes
   with_items: "{{ admin_users }}"
+
+- name: Create networks
+  shell:
+    cmd: "if ! docker network inspect {{ docker_net.name }}; then docker network create --driver=bridge --subnet={{ docker_net.cidr }} --gateway={{ docker_net.gateway }} {{ docker_net.name }}; fi"
+  register: docker_network_output
+  changed_when: "'No such network' in docker_network_output.stdout"
+
+- name: Create dir for compose files
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: root
+    group: docker
+  loop:
+    - /srv/compose
+    - /srv/volumes
+
+- name: Deploy compose files
+  template:
+    src: "compose-{{ item }}.yaml.j2"
+    dest: "/srv/compose/{{ item }}.yaml"
+    owner: root
+    group: docker
+  loop:
+    "{{ docker_services }}"
+
+- name: Deploy volumes files
+  template:
+    src: "volume-{{ item }}.j2"
+    dest: "/srv/volumes/{{ item }}"
+    owner: root
+    group: docker
+  loop:
+    "{{ docker_volumes }}"
+

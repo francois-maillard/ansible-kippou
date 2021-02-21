@@ -2,7 +2,17 @@
 # tasks file for kippou
 
 - include: 'users.yml'
-- include: 'vi.yml'
-- include: 'fail2ban.yml'
-- include: 'docker.yml'
+  tags:
+  - users
 
+- include: 'vi.yml'
+  tags:
+  - vi
+
+- include: 'fail2ban.yml'
+  tags:
+  - fail2ban
+
+- include: 'docker.yml'
+  tags:
+  - docker
