@@ -13,9 +13,14 @@ frontend http
     bind :80
     mode http
 
-    acl acl_claire hdr(host) -i claire.kippou.fr
-    use_backend claire if acl_claire
+{% for svc in ["claire", "bio"] %}
+    acl acl_{{ svc }} hdr(host) -i {{ svc }}.kippou.fr
+    use_backend {{ svc }} if acl_{{ svc }}
+{% endfor %}
 
-backend claire
+{% for svc in ["claire", "bio"] %}
+backend {{ svc }}
     mode http
-    server server1 {{ docker_net.ips['claire'] }}:80
+    server back_{{ svc }}_1 {{ docker_net.ips[svc] }}:80
+
+{% endfor %}

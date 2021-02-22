@@ -1,0 +1,12 @@
+version: "2.3"
+
+services:
+  bio:
+    image: bio
+    networks:
+      {{ docker_net.name }}:
+        ipv4_address: {{ docker_net.ips.bio }}
+
+networks:
+  {{ docker_net.name }}:
+    external: true

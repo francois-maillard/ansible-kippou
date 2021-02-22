@@ -22,6 +22,7 @@ docker_net:
   ips:
     haproxy: 172.16.222.80
     claire: 172.16.222.100
+    bio: 172.16.222.150
 
 docker_volumes:
   - haproxy.cfg
@@ -30,3 +31,4 @@ docker_volumes:
 docker_services:
   - claire
   - haproxy
+  - bio
