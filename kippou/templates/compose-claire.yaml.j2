@@ -5,6 +5,7 @@ services:
     image: nginx
     volumes:
      - /home/claire/www:/usr/share/nginx/html
+     - /srv/volumes/claire-nginx.conf:/etc/nginx/nginx.conf
     networks:
       {{ docker_net.name }}:
         ipv4_address: {{ docker_net.ips.claire }}

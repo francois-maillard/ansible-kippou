@@ -25,6 +25,7 @@ docker_net:
 
 docker_volumes:
   - haproxy.cfg
+  - claire-nginx.conf
 
 docker_services:
   - claire
