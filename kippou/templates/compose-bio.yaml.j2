@@ -3,6 +3,10 @@ version: "2.3"
 services:
   bio:
     image: bio
+    volumes:
+    - /srv/volumes/bio.yaml:/species.yaml
+    environment:
+    - CONFIG=/species.yaml
     networks:
       {{ docker_net.name }}:
         ipv4_address: {{ docker_net.ips.bio }}
