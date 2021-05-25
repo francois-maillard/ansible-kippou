@@ -17,6 +17,8 @@ frontend http
     acl acl_{{ svc }} hdr(host) -i {{ svc }}.kippou.fr
     use_backend {{ svc }} if acl_{{ svc }}
 {% endfor %}
+    acl acl_claire hdr(host) -i claire.kippou.fr
+    use_backend claire if acl_claire
 
 {% for svc in ["claire", "bio"] %}
 backend {{ svc }}
